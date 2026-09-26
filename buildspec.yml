@@ -1,0 +1,28 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Install phase started"
+      - echo "No software installation required for static HTML website"
+
+  pre_build:
+    commands:
+      - echo "CI validation started"
+      - echo "Checking whether index.html exists"
+      - test -f index.html
+      - echo "Checking whether Attari Classes text exists"
+      - grep -q "Attari Classes" index.html
+      - echo "CI validation passed"
+
+  build:
+    commands:
+      - echo "Build phase started"
+      - mkdir -p build
+      - cp index.html build/
+      - echo "Build completed successfully"
+
+artifacts:
+  base-directory: build
+  files:
+    - '**/*'
